@@ -11,6 +11,10 @@ namespace FluctufacePlay
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            var server = new Server();
+            server.Start();
+            Console.ReadLine();
+            Console.WriteLine("Fluctuant: " + FluctuatingFloat.ToString());
             Console.ReadLine();
         }
     }

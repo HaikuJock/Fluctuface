@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Fluctuface.Server": {
-      "commandName": "Project",
-      "commandLineArgs": "\"..\\..\\..\\..\\FluctufacePlay\\bin\\Debug\\netcoreapp3.1\""
-    }
-  }
-}

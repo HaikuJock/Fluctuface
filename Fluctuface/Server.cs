@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
 using System.Reflection;
-using Fluctuface;
+using System.Text;
 
-namespace Fluctuface.Server
+namespace Fluctuface
 {
     class FluctuantVariable
     {
@@ -14,41 +11,25 @@ namespace Fluctuface.Server
         public FieldInfo FieldInfo;
     }
 
-    class Program
+    public class Server
     {
-        static readonly HttpClient httpClient;
-
-        static Program()
+        public Server()
         {
-            httpClient = new HttpClient(new HttpClientHandler(), true);
+
         }
 
-        static void Main(string[] args)
+        public void Start()
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Fluctuface.Server.Program");
-
-            string folderPath = Directory.GetCurrentDirectory();
-            if (args.Length > 0)
-            {
-                folderPath = args[0];
-            }
-            DirectoryInfo directory = new DirectoryInfo(folderPath);
-            string searchPattern = "*.dll";
             var fluctuants = new List<FluctuantVariable>();
 
-            foreach (FileInfo file in directory.GetFiles(searchPattern, SearchOption.TopDirectoryOnly))
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                fluctuants.AddRange(GetFluctuants(file.FullName));
+                fluctuants.AddRange(GetFluctuants(assembly));
             }
-
-
-            Console.ReadLine();
         }
 
-        private static List<FluctuantVariable> GetFluctuants(string dllPath)
+        private static List<FluctuantVariable> GetFluctuants(Assembly assembly)
         {
-            Assembly assembly = Assembly.LoadFile(dllPath);
             var fluctuants = new List<FluctuantVariable>();
 
             if (assembly.GetCustomAttribute<FluctuantAssembly>() != null)
@@ -70,15 +51,13 @@ namespace Fluctuface.Server
                                 Fluctuant = fluct,
                             };
                             fluctuants.Add(fluctuantVariable);
+                            field.SetValue(null, 0.999f);
                         }
                     }
                 }
 
             }
 
-            //Type type = assembly.GetType(ClassName);
-            //return Type.GetType(type.AssemblyQualifiedName).Get
-            //GetProperties().Select(a => a.ToString()).ToList();
             return fluctuants;
         }
     }
