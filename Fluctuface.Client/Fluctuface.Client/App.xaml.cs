@@ -16,8 +16,8 @@ namespace Fluctuface.Client
 
             //Variables = new FluctuantVariables(new RestService());
 
-            //DependencyService.Register<FluctuantVariables>();
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<FluctuantVariables>();
+            //DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
         }
 
