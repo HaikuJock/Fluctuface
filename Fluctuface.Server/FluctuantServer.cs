@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Fluctuface
+namespace Fluctuface.Server
 {
 
-    public class Server
+    public class FluctuantServer
     {
         public List<FluctuantVariable> flucts;
         public Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
 
 
-        public Server()
+        public FluctuantServer()
         {
         }
 

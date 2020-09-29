@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Fluctuface.Models;
 using Fluctuface.Controllers;
 
-namespace Fluctuface
+namespace Fluctuface.Server
 {
     public class Startup
     {
@@ -40,7 +40,7 @@ namespace Fluctuface
                 app.UseDeveloperExceptionPage();
             }
 
-            var server = new Server();
+            var server = new FluctuantServer();
             server.Start();
             FluctuantVariablesController.server = server;
 

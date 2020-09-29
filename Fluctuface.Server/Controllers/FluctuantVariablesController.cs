@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Fluctuface.Models;
 using System.Reflection;
 
-namespace Fluctuface.Controllers
+namespace Fluctuface.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

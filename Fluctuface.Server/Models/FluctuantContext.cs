@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Fluctuface.Models
+namespace Fluctuface.Server.Models
 {
     public class FluctuantContext : DbContext
     {
