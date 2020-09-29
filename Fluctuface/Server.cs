@@ -9,24 +9,26 @@ namespace Fluctuface
 
     public class Server
     {
+        public List<FluctuantVariable> flucts;
+        public Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
+
+
         public Server()
         {
-
         }
 
-        public List<FluctuantVariable> Start()
+        public void Start()
         {
-            var fluctuants = new List<FluctuantVariable>();
+            flucts = new List<FluctuantVariable>();
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                fluctuants.AddRange(GetFluctuants(assembly));
+                flucts.AddRange(GetFluctuants(assembly));
             }
 
-            return fluctuants;
         }
 
-        private static List<FluctuantVariable> GetFluctuants(Assembly assembly)
+        private List<FluctuantVariable> GetFluctuants(Assembly assembly)
         {
             var fluctuants = new List<FluctuantVariable>();
 
@@ -43,13 +45,13 @@ namespace Fluctuface
                         if (fluct != null)
                         {
                             Console.WriteLine("Found a fluct!");
-                            var fluctuantVariable = new FluctuantVariable(fluct, field);
+                            var fluctuantVariable = new FluctuantVariable(fluct, (float)field.GetValue(null));
 
                             fluctuants.Add(fluctuantVariable);
+                            fluctuantFields[fluctuantVariable.Id] = field;
                         }
                     }
                 }
-
             }
 
             return fluctuants;

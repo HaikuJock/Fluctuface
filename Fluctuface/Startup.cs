@@ -41,7 +41,8 @@ namespace Fluctuface
             }
 
             var server = new Server();
-            FluctuantVariablesController.flucts = server.Start();
+            server.Start();
+            FluctuantVariablesController.server = server;
 
             app.UseRouting();
 

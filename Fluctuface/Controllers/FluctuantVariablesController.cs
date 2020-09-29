@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Fluctuface.Models;
+using System.Reflection;
 
 namespace Fluctuface.Controllers
 {
@@ -13,17 +14,17 @@ namespace Fluctuface.Controllers
     [ApiController]
     public class FluctuantVariablesController : ControllerBase
     {
-        public static List<FluctuantVariable> flucts;
+        public static Server server;
         private readonly FluctuantContext _context;
 
         public FluctuantVariablesController(FluctuantContext context)
         {
             _context = context;
-            foreach (var fluct in flucts)
+            foreach (var fluct in server.flucts)
             {
                 if (!FluctuantVariableExists(fluct.Id))
                 {
-                    _context.Add(fluct);    
+                    _context.Add(fluct);
                 }
             }
             _context.SaveChanges();
@@ -65,7 +66,14 @@ namespace Fluctuface.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync().ContinueWith(task =>
+                {
+                    if (server.fluctuantFields.ContainsKey(id))
+                    {
+                        server.fluctuantFields[id].SetValue(null, fluctuantVariable.Value);
+                    }
+                    return task;
+                });
             }
             catch (DbUpdateConcurrencyException)
             {
