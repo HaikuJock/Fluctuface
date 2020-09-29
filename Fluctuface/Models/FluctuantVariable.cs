@@ -8,7 +8,7 @@ namespace Fluctuface.Models
 {
     public class FluctuantVariable
     {
-        public string Guid { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public float Min { get; set; }
         public float Max { get; set; }
@@ -29,7 +29,7 @@ namespace Fluctuface.Models
 
         public FluctuantVariable(string guid, string name, float min, float max, float value)
         {
-            Guid = guid;
+            Id = guid;
             Name = name;
             Min = min;
             Max = max;
