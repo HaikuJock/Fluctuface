@@ -10,8 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Fluctuface.Models;
-using Fluctuface.Controllers;
+using Fluctuface.Server.Controllers;
+using Fluctuface.Server.Models;
 
 namespace Fluctuface.Server
 {

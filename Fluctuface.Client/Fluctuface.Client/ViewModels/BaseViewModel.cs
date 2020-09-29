@@ -12,7 +12,7 @@ namespace Fluctuface.Client.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<FluctuantVariable> DataStore => DependencyService.Get<IDataStore<FluctuantVariable>>();
 
         bool isBusy = false;
         public bool IsBusy

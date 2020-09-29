@@ -26,10 +26,10 @@ namespace Fluctuface.Client.Views
         {
             InitializeComponent();
 
-            var item = new Item
+            var item = new FluctuantVariable
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Name = "Item 1",
+                Value = 1f,
             };
 
             viewModel = new ItemDetailViewModel(item);

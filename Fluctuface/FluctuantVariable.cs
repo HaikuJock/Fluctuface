@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Fluctuface.Models
+namespace Fluctuface
 {
     public class FluctuantVariable
     {

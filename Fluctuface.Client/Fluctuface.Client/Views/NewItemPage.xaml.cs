@@ -13,16 +13,16 @@ namespace Fluctuface.Client.Views
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public FluctuantVariable Item { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Item = new FluctuantVariable
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Name = "Item name",
+                Value = 0.0f,
             };
 
             BindingContext = this;

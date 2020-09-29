@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Fluctuface.Models;
 using System.Reflection;
+using Fluctuface.Server.Models;
 
 namespace Fluctuface.Server.Controllers
 {
@@ -14,7 +14,7 @@ namespace Fluctuface.Server.Controllers
     [ApiController]
     public class FluctuantVariablesController : ControllerBase
     {
-        public static Server server;
+        public static FluctuantServer server;
         private readonly FluctuantContext _context;
 
         public FluctuantVariablesController(FluctuantContext context)
