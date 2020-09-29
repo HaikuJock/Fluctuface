@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Fluctuface.Models;
+using Fluctuface.Controllers;
 
 namespace Fluctuface
 {
@@ -38,6 +39,9 @@ namespace Fluctuface
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var server = new Server();
+            FluctuantVariablesController.flucts = server.Start();
 
             app.UseRouting();
 

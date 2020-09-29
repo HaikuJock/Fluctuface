@@ -8,13 +8,48 @@ namespace Fluctuface.Models
 {
     public class FluctuantVariable
     {
-        public string Id { get; set; }
+        private string _id;
+        public string Id { 
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                if (fluctuantFields.ContainsKey(_id))
+                {
+                    fieldInfo = fluctuantFields[_id];
+                    fieldInfo.SetValue(null, _value);
+                }
+            }
+        }
         public string Name { get; set; }
         public float Min { get; set; }
         public float Max { get; set; }
-        public float Value { get; set; }
+        private float _value;
+        public float Value
+        {
+            get
+            {
+                if (fieldInfo != null)
+                {
+                    return (float)fieldInfo.GetValue(null);
+                }
+                return _value;
+            }
 
-        private readonly FieldInfo fieldInfo;
+            set
+            {
+                _value = value;
+                if (fieldInfo != null)
+                {
+                    fieldInfo.SetValue(null, _value);
+                }
+            }
+        }
+
+        private FieldInfo fieldInfo;
 
         static Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
 

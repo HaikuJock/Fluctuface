@@ -13,17 +13,18 @@ namespace Fluctuface.Controllers
     [ApiController]
     public class FluctuantVariablesController : ControllerBase
     {
+        public static List<FluctuantVariable> flucts;
         private readonly FluctuantContext _context;
 
         public FluctuantVariablesController(FluctuantContext context)
         {
             _context = context;
-            var server = new Server();
-            var flucts = server.Start();
-
             foreach (var fluct in flucts)
             {
-                _context.Add(fluct);
+                if (!FluctuantVariableExists(fluct.Id))
+                {
+                    _context.Add(fluct);    
+                }
             }
             _context.SaveChanges();
         }
