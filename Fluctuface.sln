@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluctuface", "Fluctuface\Fluctuface.csproj", "{81C25430-FC76-4D37-B628-0238CC8DAE02}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluctufaceTests", "FluctufaceTests\FluctufaceTests.csproj", "{E15E42D6-A708-425F-BE36-56E52E4FE4A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluctufacePlay", "FluctufacePlay\FluctufacePlay.csproj", "{E3F3074E-B330-49DE-946A-DFFD018BF2DF}"
@@ -12,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluctuface.Client.iOS", "Fluctuface.Client\Fluctuface.Client.iOS\Fluctuface.Client.iOS.csproj", "{335F0C50-BA79-44BA-8568-16B05C3FE02C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluctuface.Client", "Fluctuface.Client\Fluctuface.Client\Fluctuface.Client.csproj", "{BD443567-4431-402D-8D1F-CE2D8FE91CF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluctuface", "Fluctuface\Fluctuface.csproj", "{9C49C36A-8B7C-43F9-8744-62884B7DF630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +23,6 @@ Global
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Release|iPhone.Build.0 = Release|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{81C25430-FC76-4D37-B628-0238CC8DAE02}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
@@ -81,6 +69,18 @@ Global
 		{BD443567-4431-402D-8D1F-CE2D8FE91CF5}.Release|iPhone.Build.0 = Release|Any CPU
 		{BD443567-4431-402D-8D1F-CE2D8FE91CF5}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{BD443567-4431-402D-8D1F-CE2D8FE91CF5}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Release|iPhone.Build.0 = Release|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{9C49C36A-8B7C-43F9-8744-62884B7DF630}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

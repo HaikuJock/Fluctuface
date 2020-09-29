@@ -1,15 +1,11 @@
-﻿using System;
+﻿using Fluctuface.Models;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
 namespace Fluctuface
 {
-    class FluctuantVariable
-    {
-        public Fluctuant Fluctuant;
-        public FieldInfo FieldInfo;
-    }
 
     public class Server
     {
@@ -45,13 +41,9 @@ namespace Fluctuface
                         if (fluct != null)
                         {
                             Console.WriteLine("Found a fluct!");
-                            var fluctuantVariable = new FluctuantVariable
-                            {
-                                FieldInfo = field,
-                                Fluctuant = fluct,
-                            };
+                            var fluctuantVariable = new FluctuantVariable(fluct, field);
+
                             fluctuants.Add(fluctuantVariable);
-                            field.SetValue(null, 0.999f);
                         }
                     }
                 }
