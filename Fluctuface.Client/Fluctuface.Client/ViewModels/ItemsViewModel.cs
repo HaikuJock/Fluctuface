@@ -21,12 +21,12 @@ namespace Fluctuface.Client.ViewModels
             Items = new ObservableCollection<FluctuantVariable>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, FluctuantVariable>(this, "AddItem", async (obj, item) =>
-            {
-                var newItem = item as FluctuantVariable;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
-            });
+            //MessagingCenter.Subscribe<NewItemPage, FluctuantVariable>(this, "AddItem", async (obj, item) =>
+            //{
+            //    var newItem = item as FluctuantVariable;
+            //    Items.Add(newItem);
+            //    await DataStore.AddItemAsync(newItem);
+            //});
         }
 
         async Task ExecuteLoadItemsCommand()

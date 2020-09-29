@@ -6,8 +6,8 @@ namespace Fluctuface.Client.Services
 {
 	public interface IRestService
 	{
-		Task<List<FluctuantVariable>> RefreshDataAsync();
+		Task<IEnumerable<FluctuantVariable>> RefreshDataAsync();
 
-		Task SaveAsync(FluctuantVariable item);
+		Task<bool> SaveAsync(FluctuantVariable item);
 	}
 }

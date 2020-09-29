@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using Xamarin.Forms;
 
-//[assembly: Dependency(typeof(HttpClientHandlerService))]
+[assembly: Dependency(typeof(Fluctuface.Client.iOS.HttpClientHandlerService))]
 namespace Fluctuface.Client.iOS
 {
     public class HttpClientHandlerService : IHttpClientHandlerService

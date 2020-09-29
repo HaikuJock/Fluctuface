@@ -24,11 +24,11 @@ namespace Fluctuface.Client.Services
 #endif
         }
 
-        public async Task<List<FluctuantVariable>> RefreshDataAsync()
+        public async Task<IEnumerable<FluctuantVariable>> RefreshDataAsync()
         {
             Items = new List<FluctuantVariable>();
 
-            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
+            Uri uri = new Uri(string.Format(Constants.GetRestUrl, string.Empty));
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
@@ -46,9 +46,9 @@ namespace Fluctuface.Client.Services
             return Items;
         }
 
-        public async Task SaveAsync(FluctuantVariable item)
+        public async Task<bool> SaveAsync(FluctuantVariable item)
         {
-            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
+            Uri uri = new Uri(string.Format(Constants.PutRestUrl, item.Id));
 
             try
             {
@@ -66,7 +66,10 @@ namespace Fluctuface.Client.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
             }
+
+            return true;
         }
     }
 }
