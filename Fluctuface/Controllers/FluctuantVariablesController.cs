@@ -18,6 +18,14 @@ namespace Fluctuface.Controllers
         public FluctuantVariablesController(FluctuantContext context)
         {
             _context = context;
+            var server = new Server();
+            var flucts = server.Start();
+
+            foreach (var fluct in flucts)
+            {
+                _context.Add(fluct);
+            }
+            _context.SaveChanges();
         }
 
         // GET: api/FluctuantVariables
@@ -71,48 +79,6 @@ namespace Fluctuface.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/FluctuantVariables
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<FluctuantVariable>> PostFluctuantVariable(FluctuantVariable fluctuantVariable)
-        {
-            _context.FluctuantVariables.Add(fluctuantVariable);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (FluctuantVariableExists(fluctuantVariable.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetFluctuantVariable", new { id = fluctuantVariable.Id }, fluctuantVariable);
-        }
-
-        // DELETE: api/FluctuantVariables/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<FluctuantVariable>> DeleteFluctuantVariable(string id)
-        {
-            var fluctuantVariable = await _context.FluctuantVariables.FindAsync(id);
-            if (fluctuantVariable == null)
-            {
-                return NotFound();
-            }
-
-            _context.FluctuantVariables.Remove(fluctuantVariable);
-            await _context.SaveChangesAsync();
-
-            return fluctuantVariable;
         }
 
         private bool FluctuantVariableExists(string id)

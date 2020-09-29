@@ -16,6 +16,8 @@ namespace Fluctuface.Models
 
         private readonly FieldInfo fieldInfo;
 
+        static Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
+
         public FluctuantVariable()
             : this("", "", 0f, 1f, 0f)
         {
@@ -25,15 +27,20 @@ namespace Fluctuface.Models
             : this(System.Guid.NewGuid().ToString(), fluctuant.Name, fluctuant.Min, fluctuant.Max, (float)fieldInfo.GetValue(null))
         {
             this.fieldInfo = fieldInfo;
+            fluctuantFields[Id] = fieldInfo;
         }
 
-        public FluctuantVariable(string guid, string name, float min, float max, float value)
+        public FluctuantVariable(string id, string name, float min, float max, float value)
         {
-            Id = guid;
+            Id = id;
             Name = name;
             Min = min;
             Max = max;
             Value = value;
+            if (fluctuantFields.ContainsKey(Id))
+            {
+                fieldInfo = fluctuantFields[Id];
+            }
         }
     }
 }

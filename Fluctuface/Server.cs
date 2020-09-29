@@ -14,7 +14,7 @@ namespace Fluctuface
 
         }
 
-        public void Start()
+        public List<FluctuantVariable> Start()
         {
             var fluctuants = new List<FluctuantVariable>();
 
@@ -22,6 +22,8 @@ namespace Fluctuface
             {
                 fluctuants.AddRange(GetFluctuants(assembly));
             }
+
+            return fluctuants;
         }
 
         private static List<FluctuantVariable> GetFluctuants(Assembly assembly)

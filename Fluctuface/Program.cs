@@ -11,6 +11,9 @@ namespace Fluctuface
 {
     public class Program
     {
+        [Fluctuant("First Fluctuant Float", 0f, 1f)]
+        public static float FluctuatingFloat = 0.5f;
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
