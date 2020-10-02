@@ -1,0 +1,3 @@
+﻿using Fluctuface;
+
+[assembly: FluctuantAssembly()]

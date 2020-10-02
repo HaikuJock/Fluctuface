@@ -68,10 +68,7 @@ namespace Fluctuface.Server.Controllers
             {
                 await _context.SaveChangesAsync().ContinueWith(task =>
                 {
-                    if (server.fluctuantFields.ContainsKey(id))
-                    {
-                        server.fluctuantFields[id].SetValue(null, fluctuantVariable.Value);
-                    }
+                    server.SendUpdateToPatron(fluctuantVariable);
                     return task;
                 });
             }

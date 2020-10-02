@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluctuface.Client.iOS", "Fl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluctuface.Client", "Fluctuface.Client\Fluctuface.Client\Fluctuface.Client.csproj", "{BD443567-4431-402D-8D1F-CE2D8FE91CF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluctuface.Server", "Fluctuface.Server\Fluctuface.Server.csproj", "{2F4B6AEE-9E63-4F2F-B655-37008B6C678D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluctuface.Server", "Fluctuface.Server\Fluctuface.Server.csproj", "{2F4B6AEE-9E63-4F2F-B655-37008B6C678D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluctuface", "Fluctuface\Fluctuface.csproj", "{E3CE6DBF-6B5C-492B-853E-064A5983C316}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluctuface", "Fluctuface\Fluctuface.csproj", "{E3CE6DBF-6B5C-492B-853E-064A5983C316}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluctuface.SampleApp", "Fluctuface.SampleApp\Fluctuface.SampleApp.csproj", "{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,18 @@ Global
 		{E3CE6DBF-6B5C-492B-853E-064A5983C316}.Release|iPhone.Build.0 = Release|Any CPU
 		{E3CE6DBF-6B5C-492B-853E-064A5983C316}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{E3CE6DBF-6B5C-492B-853E-064A5983C316}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Release|iPhone.Build.0 = Release|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{64CD0F34-BAAB-4869-9868-8F0846E0ACFF}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

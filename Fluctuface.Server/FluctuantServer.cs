@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 
 namespace Fluctuface.Server
 {
 
     public class FluctuantServer
     {
-        public List<FluctuantVariable> flucts;
-        public Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
-
+        public List<FluctuantVariable> flucts = new List<FluctuantVariable>();
+        NamedPipeServerStream pipe;
 
         public FluctuantServer()
         {
@@ -18,42 +19,26 @@ namespace Fluctuface.Server
 
         public void Start()
         {
-            flucts = new List<FluctuantVariable>();
-
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            pipe = new NamedPipeServerStream("Fluctuface.Pipe", PipeDirection.InOut);
+            Console.WriteLine("Waiting for connection....");
+            pipe.WaitForConnectionAsync().ContinueWith(task =>
             {
-                flucts.AddRange(GetFluctuants(assembly));
-            }
-
+                Console.WriteLine("Connected");
+                JsonSerializer.DeserializeAsync<List<FluctuantVariable>>(pipe).AsTask().ContinueWith(listOfVariablesTask =>
+                {
+                    Console.WriteLine("DeserializedAsync");
+                    if (!listOfVariablesTask.IsFaulted)
+                    {
+                        Console.WriteLine($"Received list of {listOfVariablesTask.Result.Count} flucts");
+                        flucts = listOfVariablesTask.Result;
+                    }
+                });
+            });
         }
 
-        private List<FluctuantVariable> GetFluctuants(Assembly assembly)
+        internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
         {
-            var fluctuants = new List<FluctuantVariable>();
-
-            if (assembly.GetCustomAttribute<FluctuantAssembly>() != null)
-            {
-                var types = assembly.GetTypes();
-
-                foreach (var type in types)
-                {
-                    foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
-                    {
-                        var fluct = field.GetCustomAttribute<Fluctuant>();
-
-                        if (fluct != null)
-                        {
-                            Console.WriteLine("Found a fluct!");
-                            var fluctuantVariable = new FluctuantVariable(fluct, (float)field.GetValue(null));
-
-                            fluctuants.Add(fluctuantVariable);
-                            fluctuantFields[fluctuantVariable.Id] = field;
-                        }
-                    }
-                }
-            }
-
-            return fluctuants;
+            JsonSerializer.SerializeAsync(pipe, fluctuantVariable);
         }
     }
 }

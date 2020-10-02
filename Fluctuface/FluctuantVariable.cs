@@ -14,16 +14,13 @@ namespace Fluctuface
         public float Max { get; set; }
         public float Value { get; set; }
 
-        private FieldInfo fieldInfo;
-
-
         public FluctuantVariable()
             : this("", "", 0f, 1f, 0f)
         {
         }
 
         public FluctuantVariable(Fluctuant fluctuant, float value)
-            : this(System.Guid.NewGuid().ToString(), fluctuant.Name, fluctuant.Min, fluctuant.Max, value)
+            : this(Guid.NewGuid().ToString(), fluctuant.Name, fluctuant.Min, fluctuant.Max, value)
         {
         }
 
