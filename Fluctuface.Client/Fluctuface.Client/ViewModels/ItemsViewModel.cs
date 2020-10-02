@@ -12,18 +12,18 @@ namespace Fluctuface.Client.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<FluctuantVariable> Items { get; set; }
+        public ObservableCollection<UpdatingFluctuant> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<FluctuantVariable>();
+            Items = new ObservableCollection<UpdatingFluctuant>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            //MessagingCenter.Subscribe<NewItemPage, FluctuantVariable>(this, "AddItem", async (obj, item) =>
+            //MessagingCenter.Subscribe<NewItemPage, UpdatingFluctuant>(this, "AddItem", async (obj, item) =>
             //{
-            //    var newItem = item as FluctuantVariable;
+            //    var newItem = item as UpdatingFluctuant;
             //    Items.Add(newItem);
             //    await DataStore.AddItemAsync(newItem);
             //});
@@ -39,7 +39,7 @@ namespace Fluctuface.Client.ViewModels
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
-                    Items.Add(item);
+                    Items.Add(new UpdatingFluctuant(DataStore, item));
                 }
             }
             catch (Exception ex)
