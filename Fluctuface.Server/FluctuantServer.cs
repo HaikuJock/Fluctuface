@@ -12,7 +12,6 @@ namespace Fluctuface.Server
         public List<FluctuantVariable> flucts = new List<FluctuantVariable>();
         NamedPipeServerStream pipe;
         StreamReader streamReader;
-        //byte[] buffer = new byte[8192];
 
         public FluctuantServer()
         {
@@ -30,27 +29,13 @@ namespace Fluctuface.Server
 
                 if (!string.IsNullOrEmpty(str))
                 {
-                    Console.Write("{0}", str);
+                    Console.WriteLine("{0}", str);
                     flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
                 }
                 else
                 {
                     Console.WriteLine("Nothing to read");
                 }
-
-                //var byteCount = pipe.Read(buffer);
-
-                //if (byteCount > 0)
-                //{
-                //    var reader = new Utf8JsonReader(buffer);
-
-                //    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(ref reader);
-                //    Console.WriteLine($"Received {flucts.Count} fluctuant variable(s)");
-                //}
-                //else
-                //{
-                //    Console.WriteLine("Nothing to read");
-                //}
             });
         }
 
