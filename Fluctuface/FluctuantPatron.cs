@@ -17,8 +17,6 @@ namespace Fluctuface
 
         public void ExposeFluctuants()
         {
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnExit);
-            
             flucts = new List<FluctuantVariable>();
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
@@ -63,22 +61,6 @@ namespace Fluctuface
                     //}
                 //});
             });
-        }
-
-        public void OnExit()
-        {
-            OnExit(null, null);
-        }
-        
-        void OnExit(object sender, EventArgs e)
-        {
-            Console.WriteLine("exit");
-            if (pipe != null)
-            {
-                pipe.Dispose();
-                pipe = null;
-                streamWriter = null;
-            }
         }
 
         private List<FluctuantVariable> GetFluctuants(Assembly assembly)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Fluctuface.Server
 {
@@ -10,8 +11,7 @@ namespace Fluctuface.Server
     public class FluctuantServer
     {
         public List<FluctuantVariable> flucts = new List<FluctuantVariable>();
-        NamedPipeServerStream pipe;
-        StreamReader streamReader;
+        NamedPipeServerStream connectedPipe;
 
         public FluctuantServer()
         {
@@ -19,37 +19,53 @@ namespace Fluctuface.Server
 
         public void Start()
         {
-            pipe = new NamedPipeServerStream("Fluctuface.Pipe", PipeDirection.InOut);
-            Console.WriteLine("Waiting for connection....");
-            pipe.WaitForConnectionAsync().ContinueWith(task =>
-            {
-                Console.WriteLine("Connected");
-                streamReader = new StreamReader(pipe);
-                string str = streamReader.ReadLine();
+            CreateListenerThread();
+        }
 
-                if (!string.IsNullOrEmpty(str))
+        void CreateListenerThread()
+        {
+            Task.Factory.StartNew(ListenerThread);
+        }
+
+        void ListenerThread()
+        {
+            var pipe = new NamedPipeServerStream("Fluctuface.Pipe", PipeDirection.InOut, 2);
+            Console.WriteLine("Waiting for connection....");
+            pipe.WaitForConnection();
+            if (pipe.IsConnected)
+            {
+                if (connectedPipe?.IsConnected == true)
                 {
-                    Console.WriteLine("{0}", str);
-                    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                    connectedPipe.Disconnect();
                 }
-                else
+                connectedPipe = pipe;
+                Console.WriteLine("Connected");
+                CreateListenerThread();
+                using (var streamReader = new StreamReader(pipe))
                 {
-                    Console.WriteLine("Nothing to read");
-                }
-                while (true)
-                {
-                    if (!pipe.IsConnected)
+                    string str = streamReader.ReadLine();
+
+                    if (!string.IsNullOrEmpty(str))
                     {
-                        Start();
-                        break;
+                        Console.WriteLine("{0}", str);
+                        flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nothing to read");
                     }
                 }
-            });
+            }
         }
 
         internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
         {
-            JsonSerializer.SerializeAsync(pipe, fluctuantVariable);
+            //var streamWriter = new StreamWriter(connectedPipe);
+            //var json = JsonSerializer.Serialize(fluctuantVariable);
+            //streamWriter.WriteLine(json);
+            //streamWriter.Flush();
+            // OR
+            //JsonSerializer.SerializeAsync(connectedPipe, fluctuantVariable);
         }
     }
 }
