@@ -70,17 +70,30 @@ namespace Fluctuface.Server
 
         internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
         {
-            Console.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
-            if (streamWriter == null)
+            if (connectedPipe != null)
             {
-                streamWriter = new StreamWriter(connectedPipe);
+                Console.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
+                if (streamWriter == null)
+                {
+                    streamWriter = new StreamWriter(connectedPipe);
+                }
+
+                var json = JsonSerializer.Serialize(fluctuantVariable);
+
+                try
+                {
+                    streamWriter.WriteLine(json);
+                    streamWriter.Flush();
+                    Console.WriteLine("Sent");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Failed to send to client");
+                    streamWriter = null;
+                    streamReader = null;
+                    connectedPipe = null;
+                }
             }
-            var json = JsonSerializer.Serialize(fluctuantVariable);
-            streamWriter.WriteLine(json);
-            streamWriter.Flush();
-            Console.WriteLine("Sent");
-            // OR
-            //JsonSerializer.SerializeAsync(connectedPipe, fluctuantVariable);
         }
     }
 }
