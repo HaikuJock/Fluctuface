@@ -10,6 +10,10 @@ namespace Fluctuface.SampleApp
         public static float FluctuatingFloat = 0.5f;
         static float PreviousFluctuating = 0f;
 
+        [Fluctuant("SecondFluctuantFloat", 0f, 100f)]
+        public static float SecondFluctuatingFloat = 50.0f;
+        static float SecondPreviousFluctuating = 0f;
+
         static FluctuantPatron patron;
 
         static void Main(string[] args)
@@ -27,8 +31,13 @@ namespace Fluctuface.SampleApp
             {
                 if (PreviousFluctuating != FluctuatingFloat)
                 {
-                    Console.WriteLine($"Change from: {PreviousFluctuating} to: {FluctuatingFloat}");
+                    Console.WriteLine($"1st: Change from: {PreviousFluctuating} to: {FluctuatingFloat}");
                     PreviousFluctuating = FluctuatingFloat;
+                }
+                if (SecondPreviousFluctuating != SecondFluctuatingFloat)
+                {
+                    Console.WriteLine($"2nd: Change from: {SecondPreviousFluctuating} to: {SecondFluctuatingFloat}");
+                    SecondPreviousFluctuating = SecondFluctuatingFloat;
                 }
                 Thread.Sleep(1000);
             }
