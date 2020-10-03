@@ -34,6 +34,31 @@ namespace Fluctuface
                 streamWriter.WriteLine(json);
                 streamWriter.Flush();
                 Console.WriteLine("Finished send");
+
+                using (var streamReader = new StreamReader(pipe))
+                {
+                    while (true)
+                    {
+                        if (!streamReader.EndOfStream)
+                        {
+                            string str = streamReader.ReadLine();
+
+                            if (!string.IsNullOrEmpty(str))
+                            {
+                                var variable = JsonSerializer.Deserialize<FluctuantVariable>(str);
+
+                                if (fluctuantFields.TryGetValue(variable.Id, out FieldInfo fieldInfo))
+                                {
+                                    fieldInfo.SetValue(null, variable.Value);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Empty pipe read!?");
+                            }
+                        }
+                    }
+                }
                 //streamWriter.Close();
                 //JsonSerializer.SerializeAsync(pipe, flucts).ContinueWith(serializeTask =>
                 //{

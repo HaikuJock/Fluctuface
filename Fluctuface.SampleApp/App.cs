@@ -6,7 +6,7 @@ namespace Fluctuface.SampleApp
 {
     class App
     {
-        [Fluctuant("First Fluctuant Float", 0f, 1f)]
+        [Fluctuant("FirstFluctuantFloat", 0f, 1f)]
         public static float FluctuatingFloat = 0.5f;
         static float PreviousFluctuating = 0f;
 

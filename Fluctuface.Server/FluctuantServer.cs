@@ -12,6 +12,8 @@ namespace Fluctuface.Server
     {
         public List<FluctuantVariable> flucts = new List<FluctuantVariable>();
         NamedPipeServerStream connectedPipe;
+        StreamWriter streamWriter;
+        StreamReader streamReader;
 
         public FluctuantServer()
         {
@@ -37,33 +39,46 @@ namespace Fluctuface.Server
                 if (connectedPipe?.IsConnected == true)
                 {
                     connectedPipe.Disconnect();
+                    try
+                    {
+                        streamWriter.Close();
+                        streamReader.Close();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    streamWriter = null;
+                    streamReader = null;
                 }
                 connectedPipe = pipe;
                 Console.WriteLine("Connected");
                 CreateListenerThread();
-                using (var streamReader = new StreamReader(pipe))
-                {
-                    string str = streamReader.ReadLine();
+                streamReader = new StreamReader(pipe);
+                string str = streamReader.ReadLine();
 
-                    if (!string.IsNullOrEmpty(str))
-                    {
-                        Console.WriteLine("{0}", str);
-                        flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Nothing to read");
-                    }
+                if (!string.IsNullOrEmpty(str))
+                {
+                    Console.WriteLine("{0}", str);
+                    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                }
+                else
+                {
+                    Console.WriteLine("Nothing to read");
                 }
             }
         }
 
         internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
         {
-            //var streamWriter = new StreamWriter(connectedPipe);
-            //var json = JsonSerializer.Serialize(fluctuantVariable);
-            //streamWriter.WriteLine(json);
-            //streamWriter.Flush();
+            Console.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
+            if (streamWriter == null)
+            {
+                streamWriter = new StreamWriter(connectedPipe);
+            }
+            var json = JsonSerializer.Serialize(fluctuantVariable);
+            streamWriter.WriteLine(json);
+            streamWriter.Flush();
+            Console.WriteLine("Sent");
             // OR
             //JsonSerializer.SerializeAsync(connectedPipe, fluctuantVariable);
         }
