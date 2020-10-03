@@ -40,9 +40,9 @@
                                 FontSize="13" />
                         <Slider
                             x:Name="slider"
-                            Value="{Binding SliderValue}"
                             Minimum="{Binding Min}"
-                            Maximum="{Binding Max}" />
+                            Maximum="{Binding Max}"
+                            Value="{Binding SliderValue}" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>

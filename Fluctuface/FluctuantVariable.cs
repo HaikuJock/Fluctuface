@@ -14,7 +14,7 @@ namespace Fluctuface
         public float Value { get; set; }
 
         public FluctuantVariable()
-            : this("", 0f, 1f, 0f)
+            : this("", 0f, float.MaxValue, 0f)
         {
         }
 
