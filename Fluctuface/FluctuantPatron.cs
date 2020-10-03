@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Pipes;
 using System.Reflection;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Fluctuface
     {
         public List<FluctuantVariable> flucts;
         public Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
+        NamedPipeClientStream pipe;
+        StreamWriter streamWriter;
 
         public void ExposeFluctuants()
         {
@@ -21,39 +24,20 @@ namespace Fluctuface
                 flucts.AddRange(GetFluctuants(assembly));
             }
 
-            var pipe = new NamedPipeClientStream(".", "Fluctuface.Pipe", PipeDirection.InOut, PipeOptions.None);
+            pipe = new NamedPipeClientStream(".", "Fluctuface.Pipe", PipeDirection.InOut, PipeOptions.None);
             Console.WriteLine("Connecting");
             pipe.ConnectAsync().ContinueWith(task =>
             {
                 Console.WriteLine($"Connected, sending variables {flucts.Count}");
-
-                //var something = new byte[5] { 1, 2, 3, 4, 5 };
-
-                //pipe.Write(something, 0, something.Length);
-
-                //var tinyTot = new TinyTot() { Number = 1234 };
-
-                //using (Utf8JsonWriter writer = new Utf8JsonWriter(pipe))
+                streamWriter = new StreamWriter(pipe);
+                var json = JsonSerializer.Serialize(flucts);
+                streamWriter.WriteLine(json);
+                streamWriter.Flush();
+                Console.WriteLine("Finished send");
+                //streamWriter.Close();
+                //JsonSerializer.SerializeAsync(pipe, flucts).ContinueWith(serializeTask =>
                 //{
-                //    JsonSerializer.Serialize(writer, tinyTot);
-                //}
-
-                //JsonSerializer.SerializeAsync(pipe, tinyTot).ContinueWith(serializeTask =>
-                //                    {
-                //                        Console.WriteLine("Sent serialized tinyTot");
-                //                    });
-                //foreach (var variable in flucts)
-                //{
-                //    JsonSerializer.SerializeAsync(pipe, variable).ContinueWith(serializeTask =>
-                //    {
-                //        Console.WriteLine("Sent serialized variables. Waiting for updates");
-                //    });
-                //}
-
-
-                JsonSerializer.SerializeAsync(pipe, flucts).ContinueWith(serializeTask =>
-                {
-                    Console.WriteLine("Sent serialized variables. Waiting for updates");
+                //    Console.WriteLine("Sent serialized variables. Waiting for updates");
                     //while (true)
                     //{
                     //    if (pipe.IsConnected)
@@ -75,7 +59,7 @@ namespace Fluctuface
                     //        });
                     //    }
                     //}
-                });
+                //});
             });
         }
 

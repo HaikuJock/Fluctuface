@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Pipes;
 using System.Text.Json;
 
@@ -10,7 +11,8 @@ namespace Fluctuface.Server
     {
         public List<FluctuantVariable> flucts = new List<FluctuantVariable>();
         NamedPipeServerStream pipe;
-        byte[] buffer = new byte[8192];
+        StreamReader streamReader;
+        //byte[] buffer = new byte[8192];
 
         public FluctuantServer()
         {
@@ -23,58 +25,32 @@ namespace Fluctuface.Server
             pipe.WaitForConnectionAsync().ContinueWith(task =>
             {
                 Console.WriteLine("Connected");
-                //while (pipe.Read(buffer) > 0)
+                streamReader = new StreamReader(pipe);
+                string str = streamReader.ReadLine();
+
+                if (!string.IsNullOrEmpty(str))
+                {
+                    Console.Write("{0}", str);
+                    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                }
+                else
+                {
+                    Console.WriteLine("Nothing to read");
+                }
+
+                //var byteCount = pipe.Read(buffer);
+
+                //if (byteCount > 0)
                 //{
-                //    Console.WriteLine("Read something");
+                //    var reader = new Utf8JsonReader(buffer);
+
+                //    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(ref reader);
+                //    Console.WriteLine($"Received {flucts.Count} fluctuant variable(s)");
                 //}
-
-                //var byteCount = pipe.Read(buffer);
-                //var reader = new Utf8JsonReader(buffer);
-                //var thing = JsonSerializer.Deserialize<TinyTot>(ref reader);
-
-                //Console.WriteLine($"Read {thing.Number}");
-
-                //var byteCount = pipe.Read(buffer);
-                //var reader = new Utf8JsonReader(buffer);
-                //var thing = JsonSerializer.Deserialize<FluctuantVariable>(ref reader);
-
-                //Console.WriteLine($"Read {thing.Name} {thing.Value}");
-
-                var byteCount = pipe.Read(buffer);
-                var reader = new Utf8JsonReader(buffer);
-                var thing = JsonSerializer.Deserialize<List<FluctuantVariable>>(ref reader);
-
-                flucts = thing;
-                Console.WriteLine($"Read {thing.Count}");
-                Console.WriteLine($"First: {thing[0].Name} {thing[0].Value}");
-
-                //JsonSerializer.DeserializeAsync<TinyTot>(pipe).AsTask().ContinueWith(listOfVariablesTask =>
+                //else
                 //{
-                //    Console.WriteLine("DeserializedAsync");
-                //    if (!listOfVariablesTask.IsFaulted)
-                //    {
-                //        Console.WriteLine($"Received tot {listOfVariablesTask.Result.Number}");
-                //        //flucts.Add(listOfVariablesTask.Result);
-                //    }
-                //});
-                //JsonSerializer.DeserializeAsync<FluctuantVariable>(pipe).AsTask().ContinueWith(listOfVariablesTask =>
-                //{
-                //    Console.WriteLine("DeserializedAsync");
-                //    if (!listOfVariablesTask.IsFaulted)
-                //    {
-                //        Console.WriteLine($"Received fluct {listOfVariablesTask.Result.Name}");
-                //        flucts.Add(listOfVariablesTask.Result);
-                //    }
-                //});
-                //JsonSerializer.DeserializeAsync<List<FluctuantVariable>>(pipe).AsTask().ContinueWith(listOfVariablesTask =>
-                //{
-                //    Console.WriteLine("DeserializedAsync");
-                //    if (!listOfVariablesTask.IsFaulted)
-                //    {
-                //        Console.WriteLine($"Received list of {listOfVariablesTask.Result.Count} flucts");
-                //        flucts = listOfVariablesTask.Result;
-                //    }
-                //});
+                //    Console.WriteLine("Nothing to read");
+                //}
             });
         }
 

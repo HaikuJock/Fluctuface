@@ -6,12 +6,6 @@ using System.Threading.Tasks;
 
 namespace Fluctuface
 {
-
-    public class TinyTot
-    {
-        public int Number { get; set; }
-    }
-
     public class FluctuantVariable
     {
         public string Id { get; set; }
