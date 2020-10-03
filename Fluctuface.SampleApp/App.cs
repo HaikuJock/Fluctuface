@@ -19,6 +19,7 @@ namespace Fluctuface.SampleApp
             patron.ExposeFluctuants();
             Task.Factory.StartNew(ReportFloatChanges);
             Console.ReadLine();
+            patron.OnExit();
         }
 
         static void ReportFloatChanges()

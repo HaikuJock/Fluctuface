@@ -36,6 +36,14 @@ namespace Fluctuface.Server
                 {
                     Console.WriteLine("Nothing to read");
                 }
+                while (true)
+                {
+                    if (!pipe.IsConnected)
+                    {
+                        Start();
+                        break;
+                    }
+                }
             });
         }
 
