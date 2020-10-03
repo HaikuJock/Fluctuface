@@ -5,13 +5,13 @@ namespace Fluctuface
     [AttributeUsage(AttributeTargets.Field)]
     public class Fluctuant : Attribute
     {
-        public readonly string Name;
+        public readonly string Id;
         public readonly float Min;
         public readonly float Max;
 
-        public Fluctuant(string name, float min, float max)
+        public Fluctuant(string id, float min, float max)
         {
-            Name = name;
+            Id = id;
             Min = min;
             Max = max;
         }

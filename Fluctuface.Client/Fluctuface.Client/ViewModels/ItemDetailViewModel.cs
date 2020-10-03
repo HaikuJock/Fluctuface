@@ -9,7 +9,7 @@ namespace Fluctuface.Client.ViewModels
         public FluctuantVariable Item { get; set; }
         public ItemDetailViewModel(FluctuantVariable item = null)
         {
-            Title = item?.Name;
+            Title = item?.Id;
             Item = item;
         }
     }

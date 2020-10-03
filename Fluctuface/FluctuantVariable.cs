@@ -9,25 +9,23 @@ namespace Fluctuface
     public class FluctuantVariable
     {
         public string Id { get; set; }
-        public string Name { get; set; }
         public float Min { get; set; }
         public float Max { get; set; }
         public float Value { get; set; }
 
         public FluctuantVariable()
-            : this("", "", 0f, 1f, 0f)
+            : this("", 0f, 1f, 0f)
         {
         }
 
         public FluctuantVariable(Fluctuant fluctuant, float value)
-            : this(Guid.NewGuid().ToString(), fluctuant.Name, fluctuant.Min, fluctuant.Max, value)
+            : this(fluctuant.Id, fluctuant.Min, fluctuant.Max, value)
         {
         }
 
-        public FluctuantVariable(string id, string name, float min, float max, float value)
+        public FluctuantVariable(string id, float min, float max, float value)
         {
             Id = id;
-            Name = name;
             Min = min;
             Max = max;
             Value = value;

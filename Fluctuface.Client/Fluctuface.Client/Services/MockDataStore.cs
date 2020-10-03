@@ -14,12 +14,12 @@ namespace Fluctuface.Client.Services
         {
             items = new List<FluctuantVariable>()
             {
-                new FluctuantVariable { Id = Guid.NewGuid().ToString(), Name = "First item",  Value=0.5f },
-                new FluctuantVariable { Id = Guid.NewGuid().ToString(), Name = "Second item", Value=0.5f },
-                new FluctuantVariable { Id = Guid.NewGuid().ToString(), Name = "Third item",  Value=0.5f },
-                new FluctuantVariable { Id = Guid.NewGuid().ToString(), Name = "Fourth item", Value=0.5f },
-                new FluctuantVariable { Id = Guid.NewGuid().ToString(), Name = "Fifth item",  Value=0.5f },
-                new FluctuantVariable { Id = Guid.NewGuid().ToString(), Name = "Sixth item",  Value=0.5f }
+                new FluctuantVariable { Id = "First item",  Value=0.5f },
+                new FluctuantVariable { Id = "Second item", Value=0.5f },
+                new FluctuantVariable { Id = "Third item",  Value=0.5f },
+                new FluctuantVariable { Id = "Fourth item", Value=0.5f },
+                new FluctuantVariable { Id = "Fifth item",  Value=0.5f },
+                new FluctuantVariable { Id = "Sixth item",  Value=0.5f }
             };
         }
 

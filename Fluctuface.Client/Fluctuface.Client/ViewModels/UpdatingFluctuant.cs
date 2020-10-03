@@ -27,7 +27,7 @@ namespace Fluctuface.Client.ViewModels
         }
 
         public UpdatingFluctuant(IDataStore<FluctuantVariable> dataStore, FluctuantVariable clone)
-            : base(clone.Id, clone.Name, clone.Min, clone.Max, clone.Value)
+            : base(clone.Id, clone.Min, clone.Max, clone.Value)
         {
             this.dataStore = dataStore;
         }

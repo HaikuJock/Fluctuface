@@ -21,7 +21,7 @@ namespace Fluctuface.Client.Views
 
             Item = new FluctuantVariable
             {
-                Name = "Item name",
+                Id = "Item id",
                 Value = 0.0f,
             };
 
