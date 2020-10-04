@@ -6,9 +6,9 @@ namespace Fluctuface.SampleApp
 {
     class App
     {
-        //[Fluctuant("FirstFluctuantFloat", 0f, 1f)]
-        //public static float FluctuatingFloat = 0.5f;
-        //static float PreviousFluctuating = 0.5f;
+        [Fluctuant("FirstFluctuantFloat", 0f, 1f)]
+        public static float FluctuatingFloat = 0.5f;
+        static float PreviousFluctuating = 0.5f;
 
         [Fluctuant("SecondFluctuantFloat", 10f, 90f)]
         public static float SecondFluctuatingFloat = 60.0f;
@@ -29,11 +29,11 @@ namespace Fluctuface.SampleApp
         {
             while (true)
             {
-                //if (PreviousFluctuating != FluctuatingFloat)
-                //{
-                //    Console.WriteLine($"1st: Change from: {PreviousFluctuating} to: {FluctuatingFloat}");
-                //    PreviousFluctuating = FluctuatingFloat;
-                //}
+                if (PreviousFluctuating != FluctuatingFloat)
+                {
+                    Console.WriteLine($"1st: Change from: {PreviousFluctuating} to: {FluctuatingFloat}");
+                    PreviousFluctuating = FluctuatingFloat;
+                }
                 if (SecondPreviousFluctuating != SecondFluctuatingFloat)
                 {
                     Console.WriteLine($"2nd: Change from: {SecondPreviousFluctuating} to: {SecondFluctuatingFloat}");
