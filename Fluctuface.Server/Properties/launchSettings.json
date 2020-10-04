@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://fluctuface:52596",
+      "applicationUrl": "http://localhost:52596",
       "sslPort": 0
     }
   },
@@ -24,7 +24,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://fluctuface:52596"
+      "applicationUrl": "http://localhost:5000"
     }
   }
 }
