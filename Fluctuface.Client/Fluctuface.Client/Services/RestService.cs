@@ -12,6 +12,7 @@ namespace Fluctuface.Client.Services
     public class RestService : IRestService
     {
         HttpClient client;
+        HostFinder hostFinder;
 
         public List<FluctuantVariable> Items { get; private set; }
 
@@ -22,13 +23,14 @@ namespace Fluctuface.Client.Services
 #else
             client = new HttpClient();
 #endif
+            hostFinder = new HostFinder(client);
         }
 
         public async Task<IEnumerable<FluctuantVariable>> RefreshDataAsync()
         {
             Items = new List<FluctuantVariable>();
 
-            Uri uri = new Uri(string.Format(Constants.GetRestUrl, string.Empty));
+            Uri uri = new Uri(string.Format(hostFinder.GetRestUrl(), string.Empty));
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
@@ -48,7 +50,7 @@ namespace Fluctuface.Client.Services
 
         public async Task<bool> SaveAsync(FluctuantVariable item)
         {
-            Uri uri = new Uri(string.Format(Constants.PutRestUrl, item.Id));
+            Uri uri = new Uri(hostFinder.PutRestUrl(item.Id));
 
             try
             {
