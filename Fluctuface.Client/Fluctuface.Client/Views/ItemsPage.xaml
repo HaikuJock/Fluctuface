@@ -28,8 +28,8 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">
-                        <Label Text="{Binding Name}" 
-                                d:Text="{Binding .}"
+                        <Label Text="{Binding Id}" 
+                                d:Text="Item id"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
