@@ -8,14 +8,9 @@ namespace Fluctuface.Client
 {
     public partial class App : Application
     {
-        public static FluctuantVariables Variables { get; private set; }
-
         public App()
         {
             InitializeComponent();
-
-            //Variables = new FluctuantVariables(new RestService());
-
             DependencyService.Register<FluctuantVariables>();
             //DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();

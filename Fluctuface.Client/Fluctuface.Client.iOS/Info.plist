@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Fluctuface.Client</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.Fluctuface.Client</string>
+	<string>com.haikuinteractive.fluctuface</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
@@ -36,9 +36,10 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>  
-	<dict> 
-		<key>NSAllowsArbitraryLoads</key><true/>  
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
 </dict>
 </plist>
