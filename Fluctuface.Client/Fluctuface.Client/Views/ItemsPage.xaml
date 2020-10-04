@@ -33,15 +33,15 @@
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
-                        <Label Text="{Binding Source={x:Reference Name=slider}, Path=Value}"
+                        <Label Text="{Binding Value}"
                                 d:Text="Item value"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
                         <Slider
                             x:Name="slider"
-                            Minimum="{Binding Min}"
-                            Maximum="{Binding Max}"
+                            Minimum="0"
+                            Maximum="1"
                             Value="{Binding SliderValue}" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
