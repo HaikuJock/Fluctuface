@@ -72,26 +72,29 @@ namespace Fluctuface.Server
         {
             if (connectedPipe != null)
             {
-                Console.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
-                if (streamWriter == null)
+                lock (connectedPipe)    // added because patron received two pieces of json on the same line when client quickly changed slider
                 {
-                    streamWriter = new StreamWriter(connectedPipe);
-                }
+                    Console.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
+                    if (streamWriter == null)
+                    {
+                        streamWriter = new StreamWriter(connectedPipe);
+                    }
 
-                var json = JsonSerializer.Serialize(fluctuantVariable);
+                    var json = JsonSerializer.Serialize(fluctuantVariable);
 
-                try
-                {
-                    streamWriter.WriteLine(json);
-                    streamWriter.Flush();
-                    Console.WriteLine("Sent");
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Failed to send to client");
-                    streamWriter = null;
-                    streamReader = null;
-                    connectedPipe = null;
+                    try
+                    {
+                        streamWriter.WriteLine(json);
+                        streamWriter.Flush();
+                        Console.WriteLine("Sent");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Failed to send to client");
+                        streamWriter = null;
+                        streamReader = null;
+                        connectedPipe = null;
+                    }
                 }
             }
         }
