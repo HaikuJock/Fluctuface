@@ -6,30 +6,40 @@ using Xamarin.Forms;
 
 namespace Fluctuface.Client.ViewModels
 {
-    public class UpdatingFluctuant : FluctuantVariable
+    public class UpdatingFluctuant : FluctuantVariable, INotifyPropertyChanged
     {
         IDataStore<FluctuantVariable> dataStore;
 
-        public float SliderValue
+        public float SliderValue // 0...1
         {
-            get => Value;
+            get
+            {
+                return (Value - Min) / (Max - Min);
+            }
             set
             {
-                Value = value;
-                OnPropertyChanged();
+                var old = Value;
+                Value = Min + value * (Max - Min);
+                if (old != Value)
+                {
+                    OnPropertyChanged();
+                }
             }
         }
 
-        void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            Console.WriteLine($"Onchanged {propertyName} to {Value}");
-            dataStore.UpdateItemAsync(this);
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public UpdatingFluctuant(IDataStore<FluctuantVariable> dataStore, FluctuantVariable clone)
             : base(clone.Id, clone.Min, clone.Max, clone.Value)
         {
             this.dataStore = dataStore;
+        }
+
+        void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            Console.WriteLine($"Onchanged Value to {Value}");
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+            dataStore.UpdateItemAsync(this);
         }
     }
 }
