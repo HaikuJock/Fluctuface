@@ -14,7 +14,9 @@ namespace Fluctuface.Server
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseUrls("http://*:" + Constants.ServicePort.ToString())
+                        .UseStartup<Startup>();
                 });
     }
 }
