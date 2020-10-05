@@ -8,7 +8,10 @@
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
 
-    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+    <RefreshView
+        IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+        Command="{Binding LoadItemsCommand}"
+        Margin="0,35,0,0">
         <CollectionView x:Name="ItemsCollectionView"
                 ItemsSource="{Binding Items}">
             <d:CollectionView.ItemsSource>
