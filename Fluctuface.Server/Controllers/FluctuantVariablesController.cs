@@ -14,8 +14,8 @@ namespace Fluctuface.Server.Controllers
     [ApiController]
     public class FluctuantVariablesController : ControllerBase
     {
-        public static FluctuantServer server;
-        private readonly FluctuantContext _context;
+        internal static FluctuantServer server;
+        readonly FluctuantContext _context;
 
         public FluctuantVariablesController(FluctuantContext context)
         {

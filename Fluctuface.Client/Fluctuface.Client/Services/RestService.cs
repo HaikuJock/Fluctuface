@@ -28,9 +28,10 @@ namespace Fluctuface.Client.Services
 
         public async Task<IEnumerable<FluctuantVariable>> RefreshDataAsync()
         {
-            Items = new List<FluctuantVariable>();
+            var getRequest = await hostFinder.GetRestUrl();
+            Uri uri = new Uri(string.Format(getRequest, string.Empty));
 
-            Uri uri = new Uri(string.Format(hostFinder.GetRestUrl(), string.Empty));
+            Items = new List<FluctuantVariable>();
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
@@ -50,13 +51,13 @@ namespace Fluctuface.Client.Services
 
         public async Task<bool> SaveAsync(FluctuantVariable item)
         {
-            Uri uri = new Uri(hostFinder.PutRestUrl(item.Id));
+            var putRequest = await hostFinder.PutRestUrl(item.Id);
+            Uri uri = new Uri(putRequest);
 
             try
             {
                 string json = JsonConvert.SerializeObject(item);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
                 HttpResponseMessage response = null;
 
                 response = await client.PutAsync(uri, content);

@@ -8,64 +8,17 @@ using System.Threading.Tasks;
 namespace Fluctuface.Server
 {
 
-    public class FluctuantServer
+    class FluctuantServer
     {
-        public List<FluctuantVariable> flucts = new List<FluctuantVariable>();
+        internal List<FluctuantVariable> flucts = new List<FluctuantVariable>();
         NamedPipeServerStream connectedPipe;
         StreamWriter streamWriter;
         StreamReader streamReader;
 
-        public FluctuantServer()
+        internal void Start()
         {
-        }
-
-        public void Start()
-        {
-            CreateListenerThread();
-        }
-
-        void CreateListenerThread()
-        {
-            Task.Factory.StartNew(ListenerThread);
-        }
-
-        void ListenerThread()
-        {
-            var pipe = new NamedPipeServerStream("Fluctuface.Pipe", PipeDirection.InOut, 2);
-            Console.WriteLine("Waiting for connection....");
-            pipe.WaitForConnection();
-            if (pipe.IsConnected)
-            {
-                if (connectedPipe?.IsConnected == true)
-                {
-                    connectedPipe.Disconnect();
-                    try
-                    {
-                        streamWriter.Close();
-                        streamReader.Close();
-                    }
-                    catch (Exception)
-                    {
-                    }
-                    streamWriter = null;
-                    streamReader = null;
-                }
-                connectedPipe = pipe;
-                Console.WriteLine("Connected");
-                CreateListenerThread();
-                streamReader = new StreamReader(pipe);
-                string str = streamReader.ReadLine();
-
-                if (!string.IsNullOrEmpty(str))
-                {
-                    Console.WriteLine("{0}", str);
-                    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
-                }
-                else
-                {
-                    Console.WriteLine("Nothing to read");
-                }
-            }
+            CreatePatronThread();
+            CreateServerDiscoveryThread();
         }
 
         internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
@@ -97,6 +50,62 @@ namespace Fluctuface.Server
                     }
                 }
             }
+        }
+
+        void CreatePatronThread()
+        {
+            Task.Factory.StartNew(PatronThread);
+        }
+
+        void CreateServerDiscoveryThread()
+        {
+            Task.Factory.StartNew(ServerDiscoveryThread);
+        }
+
+        void PatronThread()
+        {
+            var pipe = new NamedPipeServerStream("Fluctuface.Pipe", PipeDirection.InOut, 2);
+            Console.WriteLine("Waiting for connection....");
+            pipe.WaitForConnection();
+            if (pipe.IsConnected)
+            {
+                if (connectedPipe?.IsConnected == true)
+                {
+                    connectedPipe.Disconnect();
+                    try
+                    {
+                        streamWriter.Close();
+                        streamReader.Close();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    streamWriter = null;
+                    streamReader = null;
+                }
+                connectedPipe = pipe;
+                Console.WriteLine("Connected");
+                CreatePatronThread();
+                streamReader = new StreamReader(pipe);
+                string str = streamReader.ReadLine();
+
+                if (!string.IsNullOrEmpty(str))
+                {
+                    Console.WriteLine("{0}", str);
+                    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                }
+                else
+                {
+                    Console.WriteLine("Nothing to read");
+                }
+            }
+        }
+
+        async Task ServerDiscoveryThread()
+        {
+            var listener = new ClientListener();
+
+            await listener.Listen();
         }
     }
 }
