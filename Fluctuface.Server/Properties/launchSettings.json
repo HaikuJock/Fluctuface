@@ -20,7 +20,7 @@
     "Fluctuface": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "api/FluctuantVariables",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
