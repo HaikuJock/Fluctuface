@@ -20,13 +20,9 @@ namespace Fluctuface.Server.Controllers
         public FluctuantVariablesController(FluctuantContext context)
         {
             _context = context;
-            foreach (var fluct in server.flucts)
-            {
-                if (!FluctuantVariableExists(fluct.Id))
-                {
-                    _context.Add(fluct);
-                }
-            }
+
+            AddNew();
+            RemoveOld();
             _context.SaveChanges();
         }
 
@@ -87,7 +83,36 @@ namespace Fluctuface.Server.Controllers
             return NoContent();
         }
 
-        private bool FluctuantVariableExists(string id)
+        void AddNew()
+        {
+            foreach (var fluct in server.flucts)
+            {
+                if (!FluctuantVariableExists(fluct.Id))
+                {
+                    _context.Add(fluct);
+                }
+            }
+        }
+
+        void RemoveOld()
+        {
+            var newIds = new HashSet<string>(server.flucts.Select(f => f.Id));
+            var deletedIds = new HashSet<string>(_context.FluctuantVariables.Select(v => v.Id));
+
+            deletedIds.ExceptWith(newIds);
+
+            foreach (var id in deletedIds)
+            {
+                var fluct = _context.FluctuantVariables.FirstOrDefault(f => f.Id == id);
+
+                if (fluct != null)
+                {
+                    _context.Remove(fluct);
+                }
+            }
+        }
+
+        bool FluctuantVariableExists(string id)
         {
             return _context.FluctuantVariables.Any(e => e.Id == id);
         }
