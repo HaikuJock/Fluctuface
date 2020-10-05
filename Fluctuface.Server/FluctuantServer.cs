@@ -11,6 +11,7 @@ namespace Fluctuface.Server
     class FluctuantServer
     {
         internal List<FluctuantVariable> flucts = new List<FluctuantVariable>();
+        Dictionary<string, FluctuantVariable> latestValues = new Dictionary<string, FluctuantVariable>();
         NamedPipeServerStream connectedPipe;
         StreamWriter streamWriter;
         StreamReader streamReader;
@@ -23,6 +24,7 @@ namespace Fluctuface.Server
 
         internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
         {
+            latestValues[fluctuantVariable.Id] = fluctuantVariable;
             if (connectedPipe != null)
             {
                 lock (connectedPipe)    // added because patron received two pieces of json on the same line when client quickly changed slider
@@ -94,7 +96,21 @@ namespace Fluctuface.Server
                 if (!string.IsNullOrEmpty(str))
                 {
                     Console.WriteLine("{0}", str);
-                    flucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                    var patronFlucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                    var newFlucts = new List<FluctuantVariable>();
+
+                    foreach (var fluct in patronFlucts)
+                    {
+                        if (latestValues.TryGetValue(fluct.Id, out FluctuantVariable latestFluct)
+                            && latestFluct.Value >= fluct.Min
+                            && latestFluct.Value <= fluct.Max)
+                        {
+                            fluct.Value = latestFluct.Value;
+                            SendUpdateToPatron(fluct);
+                        }
+                        newFlucts.Add(fluct);
+                    }
+                    flucts = newFlucts;
                 }
                 else
                 {
