@@ -10,10 +10,16 @@ namespace Fluctuface
 {
     public class FluctuantPatron
     {
+        public static FluctuantPatron Instance = new FluctuantPatron();
+
         readonly List<FluctuantVariable> flucts = new List<FluctuantVariable>();
         readonly Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
         NamedPipeClientStream pipe;
         StreamWriter streamWriter;
+
+        private FluctuantPatron()
+        {
+        }
 
         public void ExposeFluctuants()
         {

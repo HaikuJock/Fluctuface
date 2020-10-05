@@ -14,13 +14,10 @@ namespace Fluctuface.SampleApp
         public static float SecondFluctuatingFloat = 60.0f;
         static float SecondPreviousFluctuating = 60.0f;
 
-        static FluctuantPatron patron;
-
         static void Main(string[] args)
         {
             Console.WriteLine("Fluctuface SampleApp!");
-            patron = new FluctuantPatron();
-            patron.ExposeFluctuants();
+            FluctuantPatron.Instance.ExposeFluctuants();
             Task.Factory.StartNew(ReportFloatChanges);
             Console.ReadLine();
         }
