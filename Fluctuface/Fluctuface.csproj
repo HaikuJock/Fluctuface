@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Jock Findlay</Authors>
+    <Company>Haiku Interactive Limited</Company>
+    <Description>Expose static float variables to Fluctuface.Server. Live edit said variables with Fluctuface.Client iOS app on local network.</Description>
+    <Copyright>Haiku Interactive Limited</Copyright>
+    <PackageId>Haiku.Fluctuface</PackageId>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageProjectUrl>https://github.com/HaikuJock/Fluctuface</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HaikuJock/Fluctuface</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>live-edit</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
