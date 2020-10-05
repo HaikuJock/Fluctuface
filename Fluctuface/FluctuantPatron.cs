@@ -1,44 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 
 namespace Fluctuface
 {
     public class FluctuantPatron
     {
-        public List<FluctuantVariable> flucts;
-        public Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
+        readonly List<FluctuantVariable> flucts = new List<FluctuantVariable>();
+        readonly Dictionary<string, FieldInfo> fluctuantFields = new Dictionary<string, FieldInfo>();
         NamedPipeClientStream pipe;
         StreamWriter streamWriter;
 
         public void ExposeFluctuants()
         {
-            flucts = new List<FluctuantVariable>();
-
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 flucts.AddRange(GetFluctuants(assembly));
             }
 
             pipe = new NamedPipeClientStream(".", "Fluctuface.Pipe", PipeDirection.InOut, PipeOptions.None);
-            Console.WriteLine("Connecting");
+            Debug.WriteLine("Connecting");
             pipe.ConnectAsync().ContinueWith(task =>
             {
-                Console.WriteLine($"Connected, sending variables {flucts.Count}");
+                Debug.WriteLine($"Connected, sending variables {flucts.Count}");
                 streamWriter = new StreamWriter(pipe);
                 var json = JsonSerializer.Serialize(flucts);
                 streamWriter.WriteLine(json);
                 streamWriter.Flush();
-                Console.WriteLine("Finished send");
+                Debug.WriteLine("Finished send");
 
                 using (var streamReader = new StreamReader(pipe))
                 {
                     while (true)
                     {
+                        // TODO: Use a blocking call to the stream rather than a tight loop
                         if (!streamReader.EndOfStream)
                         {
                             string str = streamReader.ReadLine();
@@ -54,41 +53,15 @@ namespace Fluctuface
                             }
                             else
                             {
-                                Console.WriteLine("Empty pipe read!?");
+                                Debug.WriteLine("Empty pipe read!?");
                             }
                         }
                     }
                 }
-                //streamWriter.Close();
-                //JsonSerializer.SerializeAsync(pipe, flucts).ContinueWith(serializeTask =>
-                //{
-                //    Console.WriteLine("Sent serialized variables. Waiting for updates");
-                    //while (true)
-                    //{
-                    //    if (pipe.IsConnected)
-                    //    {
-                    //        JsonSerializer.DeserializeAsync<FluctuantVariable>(pipe).AsTask().ContinueWith(deserializeTask =>
-                    //        {
-                    //            Console.WriteLine("Deserialized");
-                    //            if (!deserializeTask.IsFaulted)
-                    //            {
-                    //                var variable = deserializeTask.Result;
-                    //                Console.WriteLine($"Got an update for {variable.Name}");
-
-                    //                if (fluctuantFields.ContainsKey(variable.Id))
-                    //                {
-                    //                    Console.WriteLine($"Setting {variable.Name} to {variable.Value}");
-                    //                    fluctuantFields[variable.Id].SetValue(null, variable.Value);
-                    //                }
-                    //            }
-                    //        });
-                    //    }
-                    //}
-                //});
             });
         }
 
-        private List<FluctuantVariable> GetFluctuants(Assembly assembly)
+        List<FluctuantVariable> GetFluctuants(Assembly assembly)
         {
             var fluctuants = new List<FluctuantVariable>();
 
@@ -104,7 +77,7 @@ namespace Fluctuface
 
                         if (fluct != null)
                         {
-                            Console.WriteLine("Found a fluct!");
+                            Debug.WriteLine("Found a fluct!");
                             var fluctuantVariable = new FluctuantVariable(fluct, (float)field.GetValue(null));
 
                             fluctuants.Add(fluctuantVariable);
