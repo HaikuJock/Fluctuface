@@ -37,7 +37,6 @@ namespace Fluctuface
                 {
                     while (true)
                     {
-                        // TODO: Use a blocking call to the stream rather than a tight loop
                         if (!streamReader.EndOfStream)
                         {
                             string str = streamReader.ReadLine();
