@@ -74,12 +74,14 @@ namespace Fluctuface.Server
                     connectedPipe.Disconnect();
                     try
                     {
-                        streamWriter.Close();
-                        streamReader.Close();
+                        connectedPipe.Close();
+                        streamWriter?.Close();
+                        streamReader?.Close();
                     }
                     catch (Exception)
                     {
                     }
+                    connectedPipe = null;
                     streamWriter = null;
                     streamReader = null;
                 }
