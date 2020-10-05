@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Text.Json;
@@ -7,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Fluctuface.Server
 {
-
     class FluctuantServer
     {
         internal List<FluctuantVariable> flucts = new List<FluctuantVariable>();
@@ -29,7 +29,7 @@ namespace Fluctuface.Server
             {
                 lock (connectedPipe)    // added because patron received two pieces of json on the same line when client quickly changed slider
                 {
-                    Console.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
+                    Debug.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
                     if (streamWriter == null)
                     {
                         streamWriter = new StreamWriter(connectedPipe);
@@ -41,11 +41,11 @@ namespace Fluctuface.Server
                     {
                         streamWriter.WriteLine(json);
                         streamWriter.Flush();
-                        Console.WriteLine("Sent");
+                        Debug.WriteLine("Sent");
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("Failed to send to client");
+                        Debug.WriteLine("Failed to send to client");
                         streamWriter = null;
                         streamReader = null;
                         connectedPipe = null;
@@ -67,7 +67,7 @@ namespace Fluctuface.Server
         void PatronThread()
         {
             var pipe = new NamedPipeServerStream("Fluctuface.Pipe", PipeDirection.InOut, 2);
-            Console.WriteLine("Waiting for connection....");
+            Debug.WriteLine("Waiting for connection....");
             pipe.WaitForConnection();
             if (pipe.IsConnected)
             {
@@ -88,14 +88,14 @@ namespace Fluctuface.Server
                     streamReader = null;
                 }
                 connectedPipe = pipe;
-                Console.WriteLine("Connected");
+                Debug.WriteLine("Connected");
                 CreatePatronThread();
                 streamReader = new StreamReader(pipe);
                 string str = streamReader.ReadLine();
 
                 if (!string.IsNullOrEmpty(str))
                 {
-                    Console.WriteLine("{0}", str);
+                    Debug.WriteLine("{0}", str);
                     var patronFlucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
                     var newFlucts = new List<FluctuantVariable>();
 
@@ -114,7 +114,7 @@ namespace Fluctuface.Server
                 }
                 else
                 {
-                    Console.WriteLine("Nothing to read");
+                    Debug.WriteLine("Nothing to read");
                 }
             }
         }

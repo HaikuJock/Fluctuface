@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Diagnostics;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +11,7 @@ namespace Fluctuface.Server
 
         internal async Task Listen()
         {
-            Console.WriteLine("Listening for clients on the network");
+            Debug.WriteLine("Listening for clients on the network");
             do
             {
                 var message = await ReceiveNextUdpMessage();
@@ -31,12 +28,12 @@ namespace Fluctuface.Server
         {
             var udpResult = await udp.ReceiveAsync();
 
-            Console.WriteLine("Received udp...");
+            Debug.WriteLine("Received udp...");
             if (udpResult.Buffer.Length > 0)
             {
                 string message = Encoding.UTF8.GetString(udpResult.Buffer);
 
-                Console.WriteLine("message : " + message);
+                Debug.WriteLine("message : " + message);
                 return message;
             }
 

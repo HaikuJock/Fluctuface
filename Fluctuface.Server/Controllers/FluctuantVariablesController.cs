@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Fluctuface.Server.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Fluctuface.Server.Models;
 
 namespace Fluctuface.Server.Controllers
 {
@@ -31,20 +28,6 @@ namespace Fluctuface.Server.Controllers
         public async Task<ActionResult<IEnumerable<FluctuantVariable>>> GetFluctuantVariables()
         {
             return await _context.FluctuantVariables.ToListAsync();
-        }
-
-        // GET: api/FluctuantVariables/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<FluctuantVariable>> GetFluctuantVariable(string id)
-        {
-            var fluctuantVariable = await _context.FluctuantVariables.FindAsync(id);
-
-            if (fluctuantVariable == null)
-            {
-                return NotFound();
-            }
-
-            return fluctuantVariable;
         }
 
         // PUT: api/FluctuantVariables/5

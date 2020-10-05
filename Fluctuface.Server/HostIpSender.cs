@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Fluctuface.Server
 {
@@ -20,12 +17,12 @@ namespace Fluctuface.Server
 
         internal void Send()
         {
-            SendOnce(); // maybe repeat a few times?
+            SendOnce();
         }
 
         void SendOnce()
         {
-            Console.WriteLine("Sending my ip: " + ipAddress);
+            Debug.WriteLine("Sending my ip: " + ipAddress);
             UdpClient client = new UdpClient();
             IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, Constants.BroadcastPort);
 
@@ -36,6 +33,7 @@ namespace Fluctuface.Server
 
         static string GetLocalIpAddress()
         {
+            // https://stackoverflow.com/a/40528818
             UnicastIPAddressInformation mostSuitableIp = null;
             var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
             foreach (var network in networkInterfaces)
@@ -62,7 +60,7 @@ namespace Fluctuface.Server
                         continue;
                     }
 
-                    // The best IP is the IP got from DHCP server
+                    // The best IP is the IP from the DHCP server
                     if (address.PrefixOrigin != PrefixOrigin.Dhcp)
                     {
                         if (mostSuitableIp == null || !mostSuitableIp.IsDnsEligible)
