@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -10,19 +9,20 @@ namespace Fluctuface.Client.Services
 {
     class HostIpRequester
     {
-        HostIpReceiver hostIpReceiver;
         CancellationToken token;
 
         internal async Task<string> RequestHost()
         {
-            hostIpReceiver = new HostIpReceiver();
+            var hostIpReceiver = new HostIpReceiver();
             var tokenSource = new CancellationTokenSource();
             
             token = tokenSource.Token;
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning disable CS4014 
+            // Because this call is not awaited, execution of the current method continues before the call is completed
+            // Don't want to wait, need the receiver to wait, the receiver won't get anything until a request has been made
             Task.Factory.StartNew(SendServiceRequestMessage, token);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014
 
             var result = await hostIpReceiver.GetReceivedHost();
 
@@ -42,7 +42,7 @@ namespace Fluctuface.Client.Services
 
         void SendOneServiceRequestMessage()
         {
-            Console.WriteLine("Requesting service...");
+            Debug.WriteLine("Requesting service...");
             UdpClient client = new UdpClient();
             IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, Constants.BroadcastPort);
 

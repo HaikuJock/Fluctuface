@@ -1,13 +1,8 @@
-﻿using System;
-using System.Net;
+﻿using Fluctuface.Client.Services;
+using System;
+using System.Diagnostics;
 using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Threading;
 using System.Threading.Tasks;
-using Fluctuface.Client.Services;
-using Plugin.Connectivity;
-using Xamarin.Essentials;
 
 namespace Fluctuface.Client
 {
@@ -37,17 +32,10 @@ namespace Fluctuface.Client
 
         async Task EnsureWeHaveHostIp()
         {
-            //if (DeviceInfo.DeviceType == DeviceType.Physical)
+            while (hostIp == null)
             {
-                while (hostIp == null)
-                {
-                    await FindHost();
-                }
+                await FindHost();
             }
-            //else
-            //{
-            //    hostIp = "192.168.0.3";
-            //}
         }
 
         async Task FindHost()
@@ -55,7 +43,7 @@ namespace Fluctuface.Client
             var hostIpRequester = new HostIpRequester();
             var ip = await hostIpRequester.RequestHost();
 
-            Console.WriteLine("Received host: " + ip);
+            Debug.WriteLine("Received host: " + ip);
             var uri = new Uri(string.Format(getRestUrl, ip, Constants.ServicePort));
 
             try
@@ -64,13 +52,13 @@ namespace Fluctuface.Client
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Verified host ip: " + ip);
+                    Debug.WriteLine("Verified host ip: " + ip);
                     hostIp = ip;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(@"ERROR {0}", ex.Message);
+                Debug.WriteLine(@"ERROR {0}", ex.Message);
             }
         }
     }

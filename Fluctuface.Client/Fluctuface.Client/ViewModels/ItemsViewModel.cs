@@ -2,11 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
-using Fluctuface.Client.Models;
-using Fluctuface.Client.Views;
 
 namespace Fluctuface.Client.ViewModels
 {
@@ -20,13 +16,6 @@ namespace Fluctuface.Client.ViewModels
             Title = "Browse";
             Items = new ObservableCollection<UpdatingFluctuant>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            //MessagingCenter.Subscribe<NewItemPage, UpdatingFluctuant>(this, "AddItem", async (obj, item) =>
-            //{
-            //    var newItem = item as UpdatingFluctuant;
-            //    Items.Add(newItem);
-            //    await DataStore.AddItemAsync(newItem);
-            //});
         }
 
         async Task ExecuteLoadItemsCommand()

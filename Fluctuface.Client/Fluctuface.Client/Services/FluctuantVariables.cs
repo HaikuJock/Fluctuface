@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace Fluctuface.Client.Services
 {
@@ -27,15 +26,5 @@ namespace Fluctuface.Client.Services
 		{
 			restService = service;
 		}
-
-		//public Task<List<FluctuantVariable>> GetTasksAsync()
-		//{
-		//	return restService.RefreshDataAsync();
-		//}
-
-		//public Task SaveTaskAsync(FluctuantVariable item)
-		//{
-		//	return restService.SaveAsync(item);
-		//}
 	}
 }

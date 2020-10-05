@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Fluctuface.Client.Services;
 using Xamarin.Forms;
@@ -37,7 +38,7 @@ namespace Fluctuface.Client.ViewModels
 
         void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            Console.WriteLine($"Onchanged Value to {Value}");
+            Debug.WriteLine($"Onchanged Value to {Value}");
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
             dataStore.UpdateItemAsync(this);
         }

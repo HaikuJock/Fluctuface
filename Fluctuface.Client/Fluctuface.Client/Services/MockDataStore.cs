@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Fluctuface.Client.Models;
 
 namespace Fluctuface.Client.Services
 {
@@ -23,12 +22,12 @@ namespace Fluctuface.Client.Services
             };
         }
 
-        public async Task<bool> AddItemAsync(FluctuantVariable item)
-        {
-            items.Add(item);
+        //public async Task<bool> AddItemAsync(FluctuantVariable item)
+        //{
+        //    items.Add(item);
 
-            return await Task.FromResult(true);
-        }
+        //    return await Task.FromResult(true);
+        //}
 
         public async Task<bool> UpdateItemAsync(FluctuantVariable item)
         {
@@ -39,18 +38,18 @@ namespace Fluctuface.Client.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
-        {
-            var oldItem = items.Where((FluctuantVariable arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+        //public async Task<bool> DeleteItemAsync(string id)
+        //{
+        //    var oldItem = items.Where((FluctuantVariable arg) => arg.Id == id).FirstOrDefault();
+        //    items.Remove(oldItem);
 
-            return await Task.FromResult(true);
-        }
+        //    return await Task.FromResult(true);
+        //}
 
-        public async Task<FluctuantVariable> GetItemAsync(string id)
-        {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
-        }
+        //public async Task<FluctuantVariable> GetItemAsync(string id)
+        //{
+        //    return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+        //}
 
         public async Task<IEnumerable<FluctuantVariable>> GetItemsAsync(bool forceRefresh = false)
         {

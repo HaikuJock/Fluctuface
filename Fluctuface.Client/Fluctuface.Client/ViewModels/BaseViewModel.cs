@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Fluctuface.Client.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Xamarin.Forms;
-
-using Fluctuface.Client.Models;
-using Fluctuface.Client.Services;
 
 namespace Fluctuface.Client.ViewModels
 {
