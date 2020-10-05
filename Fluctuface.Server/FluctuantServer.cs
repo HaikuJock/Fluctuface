@@ -24,12 +24,12 @@ namespace Fluctuface.Server
 
         internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
         {
-            latestValues[fluctuantVariable.Id] = fluctuantVariable;
             if (connectedPipe != null)
             {
                 lock (connectedPipe)    // added because patron received two pieces of json on the same line when client quickly changed slider
                 {
                     Debug.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
+                    latestValues[fluctuantVariable.Id] = fluctuantVariable;
                     if (streamWriter == null)
                     {
                         streamWriter = new StreamWriter(connectedPipe);
