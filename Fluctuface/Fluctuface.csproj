@@ -7,14 +7,15 @@
     <Description>Expose static float variables to Fluctuface.Server. Live edit said variables with Fluctuface.Client iOS app on local network.</Description>
     <Copyright>Haiku Interactive Limited</Copyright>
     <PackageId>Haiku.Fluctuface</PackageId>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
     <PackageProjectUrl>https://github.com/HaikuJock/Fluctuface</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HaikuJock/Fluctuface</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>live-edit</PackageTags>
     <AssemblyName>Haiku.Fluctuface</AssemblyName>
     <RootNamespace>Haiku.Fluctuface</RootNamespace>
+    <Version>1.0.0.1-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>
