@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Fluctuface.Server
@@ -53,19 +54,24 @@ namespace Fluctuface.Server
                     if (IPAddress.IsLoopback(address.Address))
                         continue;
 
-                    if (!address.IsDnsEligible)
+                    if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                     {
-                        if (mostSuitableIp == null)
-                            mostSuitableIp = address;
-                        continue;
-                    }
+                        // These two checks hang indefinitely on OSX
 
-                    // The best IP is the IP from the DHCP server
-                    if (address.PrefixOrigin != PrefixOrigin.Dhcp)
-                    {
-                        if (mostSuitableIp == null || !mostSuitableIp.IsDnsEligible)
-                            mostSuitableIp = address;
-                        continue;
+                        if (!address.IsDnsEligible)
+                        {
+                            if (mostSuitableIp == null)
+                                mostSuitableIp = address;
+                            continue;
+                        }
+
+                        // The best IP is the IP from the DHCP server
+                        if (address.PrefixOrigin != PrefixOrigin.Dhcp)
+                        {
+                            if (mostSuitableIp == null || !mostSuitableIp.IsDnsEligible)
+                                mostSuitableIp = address;
+                            continue;
+                        }
                     }
                     return address.Address.ToString();
                 }
