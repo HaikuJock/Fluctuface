@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluctufaceTests", "FluctufaceTests\FluctufaceTests.csproj", "{E15E42D6-A708-425F-BE36-56E52E4FE4A3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluctuface.Client.iOS", "Fluctuface.Client\Fluctuface.Client.iOS\Fluctuface.Client.iOS.csproj", "{335F0C50-BA79-44BA-8568-16B05C3FE02C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluctuface.Client", "Fluctuface.Client\Fluctuface.Client\Fluctuface.Client.csproj", "{BD443567-4431-402D-8D1F-CE2D8FE91CF5}"
@@ -28,18 +26,6 @@ Global
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Release|iPhone.Build.0 = Release|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{E15E42D6-A708-425F-BE36-56E52E4FE4A3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{335F0C50-BA79-44BA-8568-16B05C3FE02C}.Debug|Any CPU.ActiveCfg = Debug|iPhone
 		{335F0C50-BA79-44BA-8568-16B05C3FE02C}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{335F0C50-BA79-44BA-8568-16B05C3FE02C}.Debug|iPhone.Build.0 = Debug|iPhone
