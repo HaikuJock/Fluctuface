@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>Haiku.Fluctuface.Client</string>
+	<string>Fluctuface</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.haikuinteractive.fluctuface</string>
 	<key>CFBundleVersion</key>
