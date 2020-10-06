@@ -66,7 +66,7 @@ namespace Haiku.Fluctuface.Server
 
         void PatronThread()
         {
-            var pipe = new NamedPipeServerStream("Haiku.Fluctuface.Pipe", PipeDirection.InOut, 2);
+            var pipe = new NamedPipeServerStream(Constants.PipeName, PipeDirection.InOut, 2);
             Debug.WriteLine("Waiting for connection....");
             pipe.WaitForConnection();
             if (pipe.IsConnected)

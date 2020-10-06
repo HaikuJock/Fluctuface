@@ -28,7 +28,7 @@ namespace Haiku.Fluctuface
                 flucts.AddRange(GetFluctuants(assembly));
             }
 
-            pipe = new NamedPipeClientStream(".", "Haiku.Fluctuface.Pipe", PipeDirection.InOut, PipeOptions.None);
+            pipe = new NamedPipeClientStream(".", Constants.PipeName, PipeDirection.InOut, PipeOptions.None);
             Debug.WriteLine("Connecting");
             pipe.ConnectAsync().ContinueWith(task =>
             {
