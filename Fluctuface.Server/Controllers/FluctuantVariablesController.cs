@@ -1,11 +1,11 @@
-﻿using Fluctuface.Server.Models;
+﻿using Haiku.Fluctuface.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fluctuface.Server.Controllers
+namespace Haiku.Fluctuface.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

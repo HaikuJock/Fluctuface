@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Haiku.Fluctuface.Server</AssemblyName>
+    <RootNamespace>Haiku.Fluctuface.Server</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Fluctuface' " />

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Fluctuface.Client.ViewModels
+namespace Haiku.Fluctuface.Client.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {

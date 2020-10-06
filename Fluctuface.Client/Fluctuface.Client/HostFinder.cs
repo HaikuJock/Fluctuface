@@ -1,10 +1,10 @@
-﻿using Fluctuface.Client.Services;
+﻿using Haiku.Fluctuface.Client.Services;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Fluctuface.Client
+namespace Haiku.Fluctuface.Client
 {
     public class HostFinder
     {

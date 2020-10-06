@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace Fluctuface.Client
+namespace Haiku.Fluctuface.Client
 {
     public interface IHttpClientHandlerService
     {

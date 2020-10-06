@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace Fluctuface.Client.Services
+namespace Haiku.Fluctuface.Client.Services
 {
 	public interface IRestService
 	{

@@ -1,3 +1,3 @@
-﻿using Fluctuface;
+﻿using Haiku.Fluctuface;
 
 [assembly: FluctuantAssembly()]

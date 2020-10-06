@@ -1,8 +1,8 @@
-﻿using Fluctuface.Client.ViewModels;
+﻿using Haiku.Fluctuface.Client.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace Fluctuface.Client.Views
+namespace Haiku.Fluctuface.Client.Views
 {
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage

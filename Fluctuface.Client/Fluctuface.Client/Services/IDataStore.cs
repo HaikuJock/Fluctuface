@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Fluctuface.Client.Services
+namespace Haiku.Fluctuface.Client.Services
 {
     public interface IDataStore<T>
     {

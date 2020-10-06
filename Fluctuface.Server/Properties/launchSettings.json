@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Fluctuface": {
+    "Haiku.Fluctuface": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/FluctuantVariables",

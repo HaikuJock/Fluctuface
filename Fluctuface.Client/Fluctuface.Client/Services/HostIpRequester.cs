@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Fluctuface.Client.Services
+namespace Haiku.Fluctuface.Client.Services
 {
     class HostIpRequester
     {

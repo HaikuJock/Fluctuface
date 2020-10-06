@@ -1,13 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
-using Newtonsoft.Json;
-using System.Diagnostics;
 
-namespace Fluctuface.Client.Services
+namespace Haiku.Fluctuface.Client.Services
 {
     public class RestService : IRestService
     {

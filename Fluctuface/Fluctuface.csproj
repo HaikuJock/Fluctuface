@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,6 +13,8 @@
     <RepositoryUrl>https://github.com/HaikuJock/Fluctuface</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>live-edit</PackageTags>
+    <AssemblyName>Haiku.Fluctuface</AssemblyName>
+    <RootNamespace>Haiku.Fluctuface</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

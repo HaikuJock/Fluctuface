@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Haiku.Fluctuface.Client.Services;
+using Haiku.Fluctuface.Client.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Fluctuface.Client.Services;
-using Fluctuface.Client.Views;
 
-namespace Fluctuface.Client
+namespace Haiku.Fluctuface.Client
 {
     public partial class App : Application
     {

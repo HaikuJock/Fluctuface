@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Fluctuface.Server.Models
+namespace Haiku.Fluctuface.Server.Models
 {
     public class FluctuantContext : DbContext
     {

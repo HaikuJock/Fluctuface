@@ -1,11 +1,11 @@
-﻿using Fluctuface.Client.Services;
+﻿using Haiku.Fluctuface.Client.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
-namespace Fluctuface.Client.ViewModels
+namespace Haiku.Fluctuface.Client.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

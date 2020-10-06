@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Haiku.Fluctuface.SampleApp</AssemblyName>
+    <RootNamespace>Haiku.Fluctuface.SampleApp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

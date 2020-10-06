@@ -1,4 +1,4 @@
-﻿namespace Fluctuface
+﻿namespace Haiku.Fluctuface
 {
     public static class Constants
     {

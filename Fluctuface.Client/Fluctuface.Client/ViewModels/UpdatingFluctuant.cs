@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Haiku.Fluctuface.Client.Services;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using Fluctuface.Client.Services;
-using Xamarin.Forms;
 
-namespace Fluctuface.Client.ViewModels
+namespace Haiku.Fluctuface.Client.ViewModels
 {
     public class UpdatingFluctuant : FluctuantVariable, INotifyPropertyChanged
     {

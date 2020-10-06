@@ -6,7 +6,7 @@ using System.IO.Pipes;
 using System.Reflection;
 using System.Text.Json;
 
-namespace Fluctuface
+namespace Haiku.Fluctuface
 {
     public class FluctuantPatron
     {
@@ -28,7 +28,7 @@ namespace Fluctuface
                 flucts.AddRange(GetFluctuants(assembly));
             }
 
-            pipe = new NamedPipeClientStream(".", "Fluctuface.Pipe", PipeDirection.InOut, PipeOptions.None);
+            pipe = new NamedPipeClientStream(".", "Haiku.Fluctuface.Pipe", PipeDirection.InOut, PipeOptions.None);
             Debug.WriteLine("Connecting");
             pipe.ConnectAsync().ContinueWith(task =>
             {

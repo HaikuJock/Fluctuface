@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Fluctuface.SampleApp
+namespace Haiku.Fluctuface.SampleApp
 {
     class App
     {

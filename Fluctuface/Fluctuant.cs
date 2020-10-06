@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fluctuface
+namespace Haiku.Fluctuface
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class Fluctuant : Attribute

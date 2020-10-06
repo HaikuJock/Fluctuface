@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fluctuface.Client.Services
+namespace Haiku.Fluctuface.Client.Services
 {
     public class HostIpReceiver
     {

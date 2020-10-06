@@ -1,5 +1,5 @@
-using Fluctuface.Server.Controllers;
-using Fluctuface.Server.Models;
+using Haiku.Fluctuface.Server.Controllers;
+using Haiku.Fluctuface.Server.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Fluctuface.Server
+namespace Haiku.Fluctuface.Server
 {
     public class Startup
     {

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Fluctuface.Server
+namespace Haiku.Fluctuface.Server
 {
     public class Program
     {

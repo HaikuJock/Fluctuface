@@ -1,8 +1,8 @@
 ﻿using System.Net.Http;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(Fluctuface.Client.iOS.HttpClientHandlerService))]
-namespace Fluctuface.Client.iOS
+[assembly: Dependency(typeof(Haiku.Fluctuface.Client.iOS.HttpClientHandlerService))]
+namespace Haiku.Fluctuface.Client.iOS
 {
     public class HttpClientHandlerService : IHttpClientHandlerService
     {
