@@ -6,7 +6,7 @@ This is a prototype; it does enough to live-edit `static float`s but it's probab
 #### Motivation
 The values of some constants are best determined aesthetically or by playing with them. In game development this is commonly achieved with an editor or debug menu but these get in the way of the experience, either visually or by a break in concentration. Fluctuface enables playing with constants from a second screen. Once set up, new constants can be exposed with a single line of code.
 
-This was inspired by [LazerWalker's]("https://twitter.com/lazerwalker") [GroundKontrol]("https://github.com/lazerwalker/GroundKontrol"). Watch her [excellent]("https://www.youtube.com/watch?v=-aXrLvdrnao&t=23m51s") [talks]("https://youtu.be/stM33UcLPJ0") for more on motivation.
+This was inspired by [LazerWalker's](https://twitter.com/lazerwalker) [GroundKontrol](https://github.com/lazerwalker/GroundKontrol). Watch her [excellent](https://www.youtube.com/watch?v=-aXrLvdrnao&t=23m51s) [talks](https://youtu.be/stM33UcLPJ0) for more on motivations.
 
 #### Dependencies
 * Visual Studio 2019 to build the server
@@ -26,7 +26,7 @@ Three components:
         [Fluctuant("BlueTint", 0f, 1f)]
         public static float BlueTintMax = 0.16666f;
 ```
-2. Clone this repository and build, publish and run the `Fluctuface.Server` application (or download and run this [Windows build]("https://fluctuface.s3-eu-west-1.amazonaws.com/Fluctuface.Server-Win.zip"))
+2. Clone this repository and build, publish and run the `Fluctuface.Server` application (or download and run this [Windows build](https://fluctuface.s3-eu-west-1.amazonaws.com/Fluctuface.Server-Win.zip))
 3. Build the `Fluctuface.Client.iOS` app on a Mac and deploy to your iOS device. You will need to use your own development certificate and provisioning profile.
 
 #### Usage

@@ -17,12 +17,18 @@ Example of waiting for assemblies to load before exposing fluctuants:
             }
             assemblyLoadEventHandler = new AssemblyLoadEventHandler(OnAssemblyLoaded);
             AppDomain.CurrentDomain.AssemblyLoad += assemblyLoadEventHandler;
+            CheckExposeFluctuants();
         }
 
         static void OnAssemblyLoaded(object sender, AssemblyLoadEventArgs args)
         {
             var assemblyShortName = args.LoadedAssembly.FullName.Substring(0, args.LoadedAssembly.FullName.IndexOf(','));
             fluctuantAssemblies.Remove(assemblyShortName);
+            CheckExposeFluctuants();
+        }
+
+        static void CheckExposeFluctuants()
+        {
             if (fluctuantAssemblies.Count == 0)
             {
                 AppDomain.CurrentDomain.AssemblyLoad -= assemblyLoadEventHandler;
