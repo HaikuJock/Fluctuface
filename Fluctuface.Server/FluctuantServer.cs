@@ -14,7 +14,6 @@ namespace Haiku.Fluctuface.Server
         Dictionary<string, FluctuantVariable> latestValues = new Dictionary<string, FluctuantVariable>();
         NamedPipeServerStream connectedPipe;
         StreamWriter streamWriter;
-        StreamReader streamReader;
 
         internal void Start()
         {
@@ -47,7 +46,6 @@ namespace Haiku.Fluctuface.Server
                     {
                         Debug.WriteLine("Failed to send to client");
                         streamWriter = null;
-                        streamReader = null;
                         connectedPipe = null;
                     }
                 }
@@ -78,43 +76,60 @@ namespace Haiku.Fluctuface.Server
                     {
                         connectedPipe.Close();
                         streamWriter?.Close();
-                        streamReader?.Close();
                     }
                     catch (Exception)
                     {
                     }
                     connectedPipe = null;
                     streamWriter = null;
-                    streamReader = null;
                 }
                 connectedPipe = pipe;
                 Debug.WriteLine("Connected");
                 CreatePatronThread();
-                streamReader = new StreamReader(pipe);
-                string str = streamReader.ReadLine();
+                Task.Factory.StartNew(ReceiveFluctuants);
+            }
+        }
 
-                if (!string.IsNullOrEmpty(str))
+        void ReceiveFluctuants()
+        {
+            if (connectedPipe != null)
+            {
+                lock (connectedPipe)
                 {
-                    Debug.WriteLine("{0}", str);
-                    var patronFlucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
-                    var newFlucts = new List<FluctuantVariable>();
-
-                    foreach (var fluct in patronFlucts)
+                    using (var streamReader = new StreamReader(connectedPipe))
                     {
-                        if (latestValues.TryGetValue(fluct.Id, out FluctuantVariable latestFluct)
-                            && latestFluct.Value >= fluct.Min
-                            && latestFluct.Value <= fluct.Max)
+                        while (true)
                         {
-                            fluct.Value = latestFluct.Value;
-                            SendUpdateToPatron(fluct);
+                            if (!streamReader.EndOfStream)
+                            {
+                                string str = streamReader.ReadLine();
+
+                                if (!string.IsNullOrEmpty(str))
+                                {
+                                    Debug.WriteLine("{0}", str);
+                                    var patronFlucts = JsonSerializer.Deserialize<List<FluctuantVariable>>(str);
+                                    var newFlucts = new List<FluctuantVariable>();
+
+                                    foreach (var fluct in patronFlucts)
+                                    {
+                                        if (latestValues.TryGetValue(fluct.Id, out FluctuantVariable latestFluct)
+                                            && latestFluct.Value >= fluct.Min
+                                            && latestFluct.Value <= fluct.Max)
+                                        {
+                                            fluct.Value = latestFluct.Value;
+                                            SendUpdateToPatron(fluct);
+                                        }
+                                        newFlucts.Add(fluct);
+                                    }
+                                    flucts = newFlucts;
+                                }
+                                else
+                                {
+                                    Debug.WriteLine("Nothing to read");
+                                }
+                            }
                         }
-                        newFlucts.Add(fluct);
                     }
-                    flucts = newFlucts;
-                }
-                else
-                {
-                    Debug.WriteLine("Nothing to read");
                 }
             }
         }
