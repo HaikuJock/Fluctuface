@@ -21,7 +21,7 @@ Three components:
 3. **Fluctuface.Client** A Xamarin app that connects to the server on the local network and creates a slider for each exposed variable. Adjusting the slider changes the variable in the `Fluctuface` application. Host discovery is done with UDP broadcast.
 
 #### Installation
-1. Add the [Haiku.Fluctuate]("https://www.nuget.org/packages/Haiku.Fluctuface") NuGet package to your application. Call `FluctuantPatron.Instance.ExposeFluctuants()` [when your assemblies are loaded]("WaitForAssembliesSample.md"). Add a `Fluctuant` attribute to a `static float` variable. For example:
+1. Add the [Haiku.Fluctuate](https://www.nuget.org/packages/Haiku.Fluctuface) NuGet package to your application. Call `FluctuantPatron.Instance.ExposeFluctuants()` [when your assemblies are loaded](WaitForAssembliesSample.md). Add a `Fluctuant` attribute to a `static float` variable. For example:
 ```
         [Fluctuant("BlueTint", 0f, 1f)]
         public static float BlueTintMax = 0.16666f;
