@@ -24,33 +24,40 @@ namespace Haiku.Fluctuface.Server
 
         internal void SendUpdateToPatron(FluctuantVariable fluctuantVariable)
         {
-            if (connectedPipe != null)
+            try
             {
-                lock (connectedPipe)    // added because patron received two pieces of json on the same line when client quickly changed slider
+                if (connectedPipe != null)
                 {
-                    Debug.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
-                    latestValues[fluctuantVariable.Id] = fluctuantVariable;
-                    if (streamWriter == null)
+                    lock (connectedPipe)    // added because patron received two pieces of json on the same line when client quickly changed slider
                     {
-                        streamWriter = new StreamWriter(connectedPipe);
-                    }
+                        Debug.WriteLine($"Sending {fluctuantVariable.Id} value: {fluctuantVariable.Value}");
+                        latestValues[fluctuantVariable.Id] = fluctuantVariable;
+                        if (streamWriter == null)
+                        {
+                            streamWriter = new StreamWriter(connectedPipe);
+                        }
 
-                    var json = JsonSerializer.Serialize(fluctuantVariable);
+                        var json = JsonSerializer.Serialize(fluctuantVariable);
 
-                    try
-                    {
-                        streamWriter.WriteLine(json);
-                        streamWriter.Flush();
-                        Debug.WriteLine("Sent");
-                    }
-                    catch (Exception)
-                    {
-                        Debug.WriteLine("Failed to send to client");
-                        streamWriter = null;
-                        streamReader = null;
-                        connectedPipe = null;
+                        try
+                        {
+                            streamWriter.WriteLine(json);
+                            streamWriter.Flush();
+                            Debug.WriteLine("Sent");
+                        }
+                        catch (Exception)
+                        {
+                            Debug.WriteLine("Failed to send to client");
+                            streamWriter = null;
+                            streamReader = null;
+                            connectedPipe = null;
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+
             }
         }
 
